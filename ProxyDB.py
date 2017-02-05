@@ -48,7 +48,9 @@ class ProxyDB:
                 "port": proxyPort
             },
             {
-                "score": score
+                "$set": {
+                    "score": score
+                }
             }
         )
 
