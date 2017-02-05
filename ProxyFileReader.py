@@ -8,7 +8,7 @@ from Proxy import Proxy
 
 class ProxyFileReader(threading.Thread):
 
-    def __init__(self, observable):
+    def __init__(self):
         super(ProxyFileReader, self).__init__()
 
     def run(self):
