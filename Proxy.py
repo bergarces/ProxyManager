@@ -16,7 +16,7 @@ class Proxy:
             self.currenttStatus = dbObject['currentStatus']
             self.currentDelta = dbObject['currentDelta']
             self.lastChecked = dbObject['lastChecked']
-            self._processPastQueries(dbObject['pastQueries'])
+            self._calculateScore(dbObject['pastQueries'])
 
     def updateProxy(self):
         startTime = time.time()
@@ -37,9 +37,10 @@ class Proxy:
 
     def _updateScore(self):
         pastQueries = self._pDB.getPastQueries(self.host, self.port)
-        self._processPastQueries(pastQueries)
+        self._calculateScore(pastQueries)
+        self._pDB.updateScore(self.host, self.port, self.score)
 
-    def _processPastQueries(self, pastQueries):
+    def _calculateScore(self, pastQueries):
         successList = list(query for query in pastQueries if query['status'])
         self.successRate = len(successList) / len(pastQueries)
 

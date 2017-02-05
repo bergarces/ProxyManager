@@ -41,6 +41,17 @@ class ProxyDB:
             upsert=True
         )
 
+    def updateScore(self, proxyHost, proxyPort, score):
+        self._db['proxies'].update(
+            {
+                "host": proxyHost,
+                "port": proxyPort
+            },
+            {
+                "score": score
+            }
+        )
+
     def getPastQueries(self, proxyHost, proxyPort):
         result = self._db['proxies'].find_one(
             {
