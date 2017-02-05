@@ -2,8 +2,8 @@
 *.log
 
 # Other unwanted files
-Tests/
-Resources/
+ProxyFiles/*
+!ProxyFiles/.gitkeep
 
 # PyCharm
 .idea/
