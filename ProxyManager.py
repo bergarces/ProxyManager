@@ -1,5 +1,10 @@
 from ProxyFileReader import ProxyFileReader
+from ProxyUpdater import ProxyUpdater
 
 
-fReader = ProxyFileReader()
-fReader.start()
+if __name__ == '__main__':
+    fReader = ProxyFileReader()
+    fReader.start()
+
+    fUpdater = ProxyUpdater(10)
+    fUpdater.start()

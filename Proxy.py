@@ -54,3 +54,23 @@ class Proxy:
 
     def __computeProxyScore(self):
         return self.successRate * 10 - (self.avgDelta * 0.2)
+
+    @staticmethod
+    def updateProxyBag(bagSize):
+        proxyBag = map(lambda dbObject: Proxy(dbObject['host'], dbObject['port']),
+                       ProxyDB().getProxyBag(bagSize))
+
+        for proxy in proxyBag:
+            proxy.updateProxy()
+
+    @staticmethod
+    def getProxyBag(bagSize):
+        return list(map(lambda dbObject: Proxy(dbObject['host'], dbObject['port']),
+                       ProxyDB().getProxyBag(bagSize)))
+
+    def __str__(self):
+        rtn = self.host + ':' + str(self.port)
+        rtn += "\n" + "successRate: " + '{0:.2f}'.format(self.successRate)
+        rtn += " " + "avgDelta: " + '{0:.2f}'.format(self.avgDelta)
+        rtn += " " + "score: " + '{0:.2f}'.format(self.score)
+        return rtn

@@ -24,7 +24,7 @@ def proxyQuery(proxyHost, proxyPort, attempts=1):
             time.sleep(5)
             return proxyQuery(proxyHost, proxyPort, attempts+1)
         else:
-            print(e, end='', flush=True)
+            # print(e, end='', flush=True)
             return False
     except:
         return False

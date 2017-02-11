@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import pymongo
 
 class ProxyDB:
 
@@ -67,3 +68,13 @@ class ProxyDB:
         )
 
         return result['pastQueries']
+
+    def getProxyBag(self, bagSize):
+        return self._db['proxies'].find(
+            {},
+            {
+                'host': 1,
+                'port': 1,
+                '_id': 0
+            }
+        ).sort('lastChecked', pymongo.ASCENDING).limit(bagSize)
